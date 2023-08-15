@@ -1,4 +1,5 @@
 <script lang="ts">
+  import "modern-css-reset";
 </script>
 
 <main>
