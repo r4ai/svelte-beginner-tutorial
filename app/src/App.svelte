@@ -1,25 +1,22 @@
 <script lang="ts">
   import TodoList from "./lib/TodoList.svelte";
-  import type { Todo } from "./lib/utils";
-
-  let todos: Todo[] = [
-    { title: "計算機概論 課題" },
-    { title: "計算機科学基礎実験 レポート" },
-    { title: "プログラム言語 レポート" },
-  ];
+  import { todos, type Todo } from "./lib/store";
 
   let newTodoTitle = "";
 
   let handleSubmit = (event: SubmitEvent) => {
     event.preventDefault();
-    todos = [...todos, { title: newTodoTitle }];
+    const newTodo: Todo = {
+      title: newTodoTitle,
+    };
+    todos.add(newTodo);
     newTodoTitle = "";
   };
 </script>
 
 <main>
   <h2>ToDo List</h2>
-  <TodoList {todos} />
+  <TodoList todos={$todos} />
   <form on:submit={handleSubmit}>
     <input type="text" placeholder="Add a new ToDo" bind:value={newTodoTitle} />
     <button>Add</button>

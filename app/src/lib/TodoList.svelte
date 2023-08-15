@@ -1,6 +1,6 @@
 <script lang="ts">
   import TodoItem from "./TodoItem.svelte";
-  import type { Todo } from "./utils";
+  import type { Todo } from "./store";
 
   export let todos: Todo[];
 </script>
