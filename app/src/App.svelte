@@ -24,21 +24,16 @@
   $: saveTodos($todos);
 </script>
 
-<main>
-  <h2>ToDo List</h2>
+<main class="flex flex-col m-4 space-y-4">
+  <h2 class="text-2xl font-black">ToDo List</h2>
   <TodoList todos={$todos} />
-  <form on:submit={handleSubmit}>
-    <input type="text" placeholder="Add a new ToDo" bind:value={newTodoTitle} />
-    <button>Add</button>
+  <form on:submit={handleSubmit} class="flex flex-row gap-4">
+    <input
+      type="text"
+      placeholder="Add a new ToDo"
+      bind:value={newTodoTitle}
+      class="flex-auto input input-bordered"
+    />
+    <button class="btn btn-outline">Add</button>
   </form>
 </main>
-
-<style>
-  main {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-    margin: 1rem;
-  }
-</style>

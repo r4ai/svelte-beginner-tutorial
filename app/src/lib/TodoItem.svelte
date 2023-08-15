@@ -12,9 +12,9 @@
   }
 </script>
 
-<div>
-  <input type="checkbox" bind:checked={done} />
-  <span style={`text-decoration: ${done ? "line-through" : "none"};`}>
+<div class="flex flex-row gap-2 px-4 py-3 items-center bg-base-200 rounded-xl">
+  <input type="checkbox" bind:checked={done} class="checkbox" />
+  <span class={done ? "line-through" : ""}>
     {title}
   </span>
 </div>

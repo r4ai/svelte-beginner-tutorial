@@ -5,20 +5,18 @@
   export let todos: Todo[];
 </script>
 
-<div class="todoList">
-  <h3>未完了</h3>
-  {#each todos.filter((todo) => !todo.done) as todo}
-    <TodoItem title={todo.title} done={todo.done} />
-  {/each}
+<div class="space-y-2">
+  <h3 class="font-bold">未完了</h3>
+  <div class="flex flex-col gap-2">
+    {#each todos.filter((todo) => !todo.done) as todo}
+      <TodoItem title={todo.title} done={todo.done} />
+    {/each}
+  </div>
 
-  <h3>完了済み</h3>
-  {#each todos.filter((todo) => todo.done) as todo}
-    <TodoItem title={todo.title} done={todo.done} />
-  {/each}
+  <h3 class="font-bold mt-4">完了済み</h3>
+  <div class="flex flex-col gap-2">
+    {#each todos.filter((todo) => todo.done) as todo}
+      <TodoItem title={todo.title} done={todo.done} />
+    {/each}
+  </div>
 </div>
-
-<style>
-  h3 {
-    margin-top: 1rem;
-  }
-</style>
