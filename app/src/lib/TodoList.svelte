@@ -3,7 +3,7 @@
 </script>
 
 <div class="todoList">
-  <TodoItem />
-  <TodoItem />
-  <TodoItem />
+  <TodoItem title="ToDo1" />
+  <TodoItem title="ToDo2" />
+  <TodoItem title="ToDo3" />
 </div>
