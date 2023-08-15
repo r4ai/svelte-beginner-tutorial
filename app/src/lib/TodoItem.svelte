@@ -1,7 +1,16 @@
 <script lang="ts">
+  import { todos } from "./store";
+
   export let title: string;
 
   let isChecked = false;
+
+  $: {
+    todos.edit(title, {
+      title,
+      done: isChecked,
+    });
+  }
 </script>
 
 <div>

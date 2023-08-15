@@ -8,6 +8,7 @@
     event.preventDefault();
     const newTodo: Todo = {
       title: newTodoTitle,
+      done: false,
     };
     todos.add(newTodo);
     newTodoTitle = "";
