@@ -1,9 +1,12 @@
 <script lang="ts">
   import TodoItem from "./TodoItem.svelte";
+  import type { Todo } from "./utils";
+
+  export let todos: Todo[];
 </script>
 
 <div class="todoList">
-  <TodoItem title="ToDo1" />
-  <TodoItem title="ToDo2" />
-  <TodoItem title="ToDo3" />
+  {#each todos as todo}
+    <TodoItem title={todo.title} />
+  {/each}
 </div>
