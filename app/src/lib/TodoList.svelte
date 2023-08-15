@@ -7,6 +7,6 @@
 
 <div class="todoList">
   {#each todos as todo}
-    <TodoItem title={todo.title} />
+    <TodoItem title={todo.title} done={todo.done} />
   {/each}
 </div>

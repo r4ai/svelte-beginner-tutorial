@@ -2,20 +2,19 @@
   import { todos } from "./store";
 
   export let title: string;
-
-  let isChecked = false;
+  export let done: boolean;
 
   $: {
     todos.edit(title, {
       title,
-      done: isChecked,
+      done,
     });
   }
 </script>
 
 <div>
-  <input type="checkbox" bind:checked={isChecked} />
-  <span style={`text-decoration: ${isChecked ? "line-through" : "none"};`}>
+  <input type="checkbox" bind:checked={done} />
+  <span style={`text-decoration: ${done ? "line-through" : "none"};`}>
     {title}
   </span>
 </div>
