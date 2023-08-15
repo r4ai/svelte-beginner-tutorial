@@ -7,13 +7,21 @@
     { title: "計算機科学基礎実験 レポート" },
     { title: "プログラム言語 レポート" },
   ];
+
+  let newTodoTitle = "";
+
+  let handleSubmit = (event: SubmitEvent) => {
+    event.preventDefault();
+    todos = [...todos, { title: newTodoTitle }];
+    newTodoTitle = "";
+  };
 </script>
 
 <main>
   <h2>ToDo List</h2>
   <TodoList {todos} />
-  <form>
-    <input type="text" placeholder="Add a new ToDo" />
+  <form on:submit={handleSubmit}>
+    <input type="text" placeholder="Add a new ToDo" bind:value={newTodoTitle} />
     <button>Add</button>
   </form>
 </main>
