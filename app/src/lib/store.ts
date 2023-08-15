@@ -12,7 +12,8 @@ const creteTodos = () => {
     subscribe,
     set,
     add: (todo: Todo) => update((todos) => [...todos, todo]),
-    remove: (todo: Todo) => update((todos) => todos.filter((t) => t !== todo)),
+    remove: (title: string) =>
+      update((todos) => todos.filter((todo) => todo.title !== title)),
     edit: (title: string, newTodo: Todo) =>
       update((todos) =>
         todos.map((todo) => (todo.title === title ? newTodo : todo)),

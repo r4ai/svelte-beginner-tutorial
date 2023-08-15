@@ -3,9 +3,15 @@
 @tailwind utilities;
 
 html,
-body {
+body,
+div#app {
   margin: 0;
   height: 100%;
+}
+
+div#app {
+  display: flex;
+  flex-direction: column;
 }
 
 h1,

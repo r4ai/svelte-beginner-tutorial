@@ -26,9 +26,11 @@
 </script>
 
 <NavBar />
-<main class="flex flex-col p-4 space-y-4 max-w-xl mx-auto">
+<main
+  class="grow flex flex-col p-4 space-y-4 w-full max-w-xl self-center overflow-y-hidden"
+>
   <h2 class="text-2xl font-black">ToDo List</h2>
-  <TodoList todos={$todos} />
+  <TodoList todos={$todos} class="grow overflow-y-auto" />
   <form on:submit={handleSubmit} class="flex flex-row gap-4">
     <input
       type="text"
