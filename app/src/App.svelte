@@ -1,11 +1,10 @@
 <script lang="ts">
   import "modern-css-reset";
+  import NavBar from "./lib/NavBar.svelte";
 </script>
 
 <main>
-  <a href="/">
-    <h1>Svelte ToDo</h1>
-  </a>
+  <NavBar />
   <div>
     <h2>ToDo List</h2>
     <div>
