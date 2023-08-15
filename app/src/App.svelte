@@ -1,4 +1,5 @@
 <script lang="ts">
+  import NavBar from "./lib/NavBar.svelte";
   import TodoList from "./lib/TodoList.svelte";
   import { todos, type Todo, saveTodos, loadTodos } from "./lib/store";
   import { onMount } from "svelte";
@@ -24,7 +25,8 @@
   $: saveTodos($todos);
 </script>
 
-<main class="flex flex-col m-4 space-y-4">
+<NavBar />
+<main class="flex flex-col p-4 space-y-4 max-w-xl mx-auto">
   <h2 class="text-2xl font-black">ToDo List</h2>
   <TodoList todos={$todos} />
   <form on:submit={handleSubmit} class="flex flex-row gap-4">
