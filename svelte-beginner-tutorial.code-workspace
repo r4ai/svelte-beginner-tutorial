@@ -1,0 +1,23 @@
+{
+  "folders": [
+    {
+      "name": "project-root",
+      "path": "."
+    },
+    {
+      "name": "app",
+      "path": "./app"
+    },
+    {
+      "name": "docs",
+      "path": "./docs"
+    }
+  ],
+  "settings": {
+    "excalidraw.image": {
+      "exportScale": 3,
+      "exportWithBackground": false,
+      "exportWithDarkMode": true
+    }
+  }
+}
