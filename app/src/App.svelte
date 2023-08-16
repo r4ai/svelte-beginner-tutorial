@@ -2,9 +2,10 @@
   import NavBar from "./lib/NavBar.svelte";
   import TodoList from "./lib/TodoList.svelte";
   import { todos, type Todo, saveTodos, loadTodos } from "./lib/store";
-  import { onMount } from "svelte";
+  import { onDestroy, onMount } from "svelte";
 
   let newTodoTitle = "";
+  let unsubscripbeSync: () => void;
 
   const handleSubmit = (event: SubmitEvent) => {
     event.preventDefault();
@@ -19,10 +20,12 @@
   // * 初回読み込み時に、localStorageからtodoListを取得する
   onMount(() => {
     $todos = loadTodos();
+    unsubscripbeSync = todos.subscribe((t) => {
+      saveTodos(t);
+    });
   });
 
-  // * todoListを永続的に保存するために、localStorageに保存する
-  $: saveTodos($todos);
+  onDestroy(unsubscripbeSync);
 </script>
 
 <NavBar />

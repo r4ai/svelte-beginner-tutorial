@@ -33,7 +33,5 @@ export const loadTodos = (): Todo[] => {
 };
 
 export const saveTodos = (todos: Todo[]) => {
-  if (todos.length > 0) {
-    localStorage.setItem("todos", JSON.stringify(todos));
-  }
+  localStorage.setItem("todos", JSON.stringify(todos));
 };
