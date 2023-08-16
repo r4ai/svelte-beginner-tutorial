@@ -12,7 +12,11 @@
   "scripts": {
     "dev": "npm run dev --workspaces",
     "slidev": "npm run dev -w docs",
-    "build": "npm run build --workspaces"
+    "build": "npm run build --workspaces",
+    "check": "npm run check --workspaces",
+    "lint": "npm run lint --workspaces",
+    "lint:fix": "npm run lint:fix --workspaces",
+    "format": "npm run format --workspaces"
   },
   "packageManager": "npm@9.5.1"
 }
