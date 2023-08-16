@@ -6,14 +6,12 @@
   export let title: string;
   export let done: boolean;
 
-  $: {
-    todos.edit(title, {
-      title,
-      done,
-    });
-  }
+  $: todos.edit(title, {
+    title,
+    done,
+  });
 
-  let handleDelete = () => {
+  const handleDelete = () => {
     todos.remove(title);
   };
 </script>
