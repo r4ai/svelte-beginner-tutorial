@@ -1,17 +1,16 @@
 name: Cloudflare Pages
 
 on:
-  push:
-    branches:
-      - main
+  workflow_run:
+    workflows: ["ci"]
+    branches: [main]
+    types:
+      - completed
 
 jobs:
-  lint-and-format:
-    uses: "./.github/workflows/ci.yml"
-
   publish:
-    needs: [lint-and-format]
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     permissions:
       contents: read
       deployments: write
