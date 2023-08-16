@@ -6,7 +6,7 @@
 
   let newTodoTitle = "";
 
-  let handleSubmit = (event: SubmitEvent) => {
+  const handleSubmit = (event: SubmitEvent) => {
     event.preventDefault();
     const newTodo: Todo = {
       title: newTodoTitle,
