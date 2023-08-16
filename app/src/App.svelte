@@ -36,7 +36,7 @@
       type="text"
       placeholder="Add a new ToDo"
       bind:value={newTodoTitle}
-      class="flex-auto input input-bordered"
+      class="grow input input-bordered"
     />
     <button class="btn btn-outline">Add</button>
   </form>
