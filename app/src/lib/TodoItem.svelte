@@ -16,13 +16,13 @@
   };
 </script>
 
-<div class="flex flex-row gap-4 px-4 py-3 items-center bg-base-200 rounded-xl">
+<div class="flex flex-row items-center gap-4 rounded-xl bg-base-200 px-4 py-3">
   <input type="checkbox" bind:checked={done} class="checkbox" />
   <span class={twMerge("flex-1 truncate", done ? "line-through" : "")}>
     {title}
   </span>
   <button
-    class="btn btn-sm hover:btn-error btn-circle text-base-content/75 hover:text-base"
+    class="btn btn-circle btn-sm text-base-content/75 hover:btn-error hover:text-base"
     on:click={handleDelete}
   >
     <Trash2 class="p-0.5" />

@@ -10,7 +10,7 @@
     "check": "svelte-check --tsconfig ./tsconfig.json && prettier --check --plugin prettier-plugin-svelte .",
     "lint": "eslint --ext .ts,.svelte .",
     "lint:fix": "eslint --ext .ts,.svelte . --fix",
-    "format": "prettier --write --plugin prettier-plugin-svelte ."
+    "format": "prettier --write './**/*.{js,cjs,ts,svelte,json,html,md}'"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^2.4.5",
@@ -28,16 +28,14 @@
     "lucide-svelte": "^0.268.0",
     "postcss": "^8.4.28",
     "prettier": "^3.0.2",
-    "prettier-plugin-organize-imports": "^3.2.3",
     "prettier-plugin-svelte": "^3.0.3",
-    "prettier-plugin-tailwindcss": "^0.5.3",
+    "prettier-plugin-tailwindcss": "^0.0.0-insiders.3c4989c",
     "svelte": "^4.2.0",
     "svelte-check": "^3.5.0",
     "svelte-eslint-parser": "^0.32.2",
     "tailwind-merge": "^1.14.0",
     "tailwindcss": "^3.3.3",
     "tslib": "^2.6.1",
-    "typescript": "^5.1.6",
-    "vite": "^4.4.9"
+    "typescript": "^5.1.6"
   }
 }

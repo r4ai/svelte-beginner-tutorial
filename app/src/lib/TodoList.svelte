@@ -14,7 +14,7 @@
     {/each}
   </div>
 
-  <h3 class="font-bold mt-4">完了済み</h3>
+  <h3 class="mt-4 font-bold">完了済み</h3>
   <div class="flex flex-col gap-2">
     {#each todos.filter((todo) => todo.done) as todo}
       <TodoItem title={todo.title} done={todo.done} />

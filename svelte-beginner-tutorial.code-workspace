@@ -18,6 +18,10 @@
       "exportScale": 3,
       "exportWithBackground": false,
       "exportWithDarkMode": true
+    },
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "[svelte]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
     }
   }
 }

@@ -15,10 +15,10 @@
 </script>
 
 <header class="bg-base-300">
-  <div class="navbar bg-base-300 max-w-2xl mx-auto">
+  <div class="navbar mx-auto max-w-2xl bg-base-300">
     <div class="flex-1">
       <a
-        class="btn btn-ghost normal-case text-xl rounded-full"
+        class="btn btn-ghost rounded-full text-xl normal-case"
         href="https://github.com/r4ai/svelte-beginner-tutorial"
       >
         <Github />
@@ -26,8 +26,12 @@
       </a>
     </div>
     <div>
-      <label class="swap swap-rotate btn btn-ghost rounded-full">
-        <input type="checkbox" bind:checked={isDarkmode} />
+      <label class="btn btn-ghost swap swap-rotate rounded-full">
+        <input
+          type="checkbox"
+          bind:checked={isDarkmode}
+          aria-label={`Switch to ${isDarkmode ? "light" : "dark"} mode`}
+        />
         <Sun class="swap-on fill-current" />
         <Moon class="swap-off fill-current" />
       </label>

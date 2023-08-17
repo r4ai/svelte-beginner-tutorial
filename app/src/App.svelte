@@ -30,7 +30,7 @@
 
 <NavBar />
 <main
-  class="grow flex flex-col p-4 space-y-4 w-full max-w-xl self-center overflow-y-hidden"
+  class="flex w-full max-w-xl grow flex-col space-y-4 self-center overflow-y-hidden p-4"
 >
   <h2 class="text-2xl font-black">ToDo List</h2>
   <TodoList todos={$todos} class="grow overflow-y-auto" />
@@ -39,7 +39,7 @@
       type="text"
       placeholder="Add a new ToDo"
       bind:value={newTodoTitle}
-      class="grow input input-bordered"
+      class="input input-bordered grow"
     />
     <button class="btn btn-outline">Add</button>
   </form>
