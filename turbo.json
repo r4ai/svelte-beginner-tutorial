@@ -6,6 +6,14 @@
       "dependsOn": ["^build"],
       "outputs": ["./dist"]
     },
+    "lint": {},
+    "lint:fix": {},
+    "check": {
+      "dependsOn": ["lint"]
+    },
+    "format": {
+      "dependsOn": ["lint:fix"]
+    },
     "dev": {
       "cache": false,
       "persistent": true

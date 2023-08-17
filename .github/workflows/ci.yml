@@ -22,8 +22,8 @@ jobs:
       - name: Install deps
         run: npm i
 
-      - name: Lint
-        run: npm run check && npm run lint:fix && npm run format
+      - name: Lint & format
+        run: npm run format
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v4
