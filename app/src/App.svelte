@@ -1,31 +1,32 @@
 <script lang="ts">
   import NavBar from "./lib/NavBar.svelte";
-  import TodoList from "./lib/TodoList.svelte";
-  import { todos, type Todo, saveTodos, loadTodos } from "./lib/store";
-  import { onDestroy, onMount } from "svelte";
+  import TodoItem from "./lib/TodoItem.svelte";
 
-  let newTodoTitle = "";
-  let unsubscripbeSync: () => void;
-
-  const handleSubmit = (event: SubmitEvent) => {
-    event.preventDefault();
-    const newTodo: Todo = {
-      title: newTodoTitle,
-      done: false,
-    };
-    todos.add(newTodo);
-    newTodoTitle = "";
+  type Todo = {
+    id: number;
+    title: string;
+    completed: boolean;
   };
 
-  // * 初回読み込み時に、localStorageからtodoListを取得する
-  onMount(() => {
-    $todos = loadTodos();
-    unsubscripbeSync = todos.subscribe((t) => {
-      saveTodos(t);
-    });
-  });
+  let todos: Todo[] = localStorage.getItem("todos")
+    ? JSON.parse(localStorage.getItem("todos"))
+    : [];
 
-  onDestroy(unsubscripbeSync);
+  $: localStorage.setItem("todos", JSON.stringify(todos));
+
+  let todoTitle = "";
+
+  const handleAddTodo = () => {
+    todos = [
+      ...todos,
+      { id: todos.length + 1, title: todoTitle, completed: false },
+    ];
+    todoTitle = "";
+  };
+
+  const deleteTodo = (id: number) => {
+    todos = todos.filter((x) => x.id !== id);
+  };
 </script>
 
 <NavBar />
@@ -33,12 +34,35 @@
   class="flex w-full max-w-xl grow flex-col space-y-4 self-center overflow-y-hidden p-4"
 >
   <h2 class="text-2xl font-black">ToDo List</h2>
-  <TodoList todos={$todos} class="grow overflow-y-auto" />
-  <form on:submit={handleSubmit} class="flex flex-row gap-4">
+  <div class="grow space-y-2 overflow-y-auto">
+    <h3 class="font-bold">未完了</h3>
+    <div class="flex flex-col gap-2">
+      {#each todos.filter((x) => !x.completed) as todo}
+        <TodoItem
+          id={todo.id}
+          title={todo.title}
+          bind:completed={todo.completed}
+          {deleteTodo}
+        />
+      {/each}
+    </div>
+    <h3 class="mt-4 font-bold">完了済み</h3>
+    <div class="flex flex-col gap-2">
+      {#each todos.filter((x) => x.completed) as todo}
+        <TodoItem
+          id={todo.id}
+          title={todo.title}
+          bind:completed={todo.completed}
+          {deleteTodo}
+        />
+      {/each}
+    </div>
+  </div>
+  <form on:submit|preventDefault={handleAddTodo} class="flex flex-row gap-4">
     <input
       type="text"
       placeholder="Add a new ToDo"
-      bind:value={newTodoTitle}
+      bind:value={todoTitle}
       class="input input-bordered grow"
     />
     <button class="btn btn-outline">Add</button>
