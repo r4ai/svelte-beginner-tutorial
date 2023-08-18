@@ -40,11 +40,11 @@ highlighter: shiki
 
 # アジェンダ
 
-- Svelte 入門 (5分)
+- Svelte 入門
   - Svelte とは
   - 演習: プロジェクトの作成
 
-- Svelte 基本文法 (20分)
+- Svelte 基本文法
   - Data binding, Props, Reactivity, etc... の解説
   - 演習: Todo アプリの作成
 
@@ -239,7 +239,7 @@ url: https://svelte.dev/repl/606742ee5f9146198df51289e66cf13b?version=4.2.0
 
 ---
 layout: iframe-right
-url: https://svelte.dev/repl/632b47d8bf9448428cd80bd381ed2ea7?version=4.2.0
+url: https://svelte.dev/repl/c1d41b6e0fed4cc288f3ff912d811ec5?version=4.2.0
 ---
 
 # データバインディング
@@ -298,7 +298,7 @@ url: https://svelte.dev/repl/d756552fc1df40a7a5dd54226b3a4597?version=4.2.0
 
 <br>
 
-> 解答：https://github.com/r4ai/svelte-skelton-template/commit/eecbfa5833cf25a44c10347a0540e53849740632s
+> 解答：https://github.com/r4ai/svelte-skelton-template/commit/eecbfa5833cf25a44c10347a0540e53849740632
 
 ---
 layout: iframe-right
@@ -361,7 +361,7 @@ url: https://svelte.dev/repl/1635882bfba64ab5aa2db2b208e19c57?version=4.2.0
 
 1. todoリストのデータを管理するための変数`todos`を`App.svelte`で定義する。
 2. この定義した変数のデータを、`TodoItem`コンポーネントに渡すことで、todoリストを表示する。
-3. フォームのsubmit時に、inputの値を持つ新しいtodoを作成し、todoリストに追加する。
+3. フォームのsubmit時に、inputタグの値を`title`とする新しいtodoを作成し、それをtodoリストに追加する。
 
 <br>
 
@@ -384,11 +384,11 @@ url: https://svelte.dev/repl/1635882bfba64ab5aa2db2b208e19c57?version=4.2.0
 
 # 演習 Step4: todoリストを未完了と完了済みで分けて表示しよう
 
-1. filter関数を使って、`completed`が`true`のtodoリストと`false`のtodoリストで、分けて表示する。
+1. filter関数を使って、`completed`が`true`のtodoリストと、`false`のtodoリストで、分けて表示する。
 
 <br>
 
-> 解答: https://github.com/r4ai/svelte-skelton-template/commit/5d6bf32e4df86387fe62aa83be7dd43c52bf6990
+> 解答: https://github.com/r4ai/svelte-skelton-template/commit/47f43f2a62a4a577b888ff9e2667f2208aa5cbe6
 
 ---
 layout: iframe-right
@@ -436,8 +436,12 @@ url: https://svelte.dev/repl/f52d833de1bb46adb55e3c2fd06d5750?version=4.2.0
 # 演習 Step5: 作成したtodoリストをlocalStorageへ保存しよう
 
 1. todoアイテムの型定義を作成する。
-2. 仮でおいていた`todos`の初期値を、localStorageから取得するようにする。
-3. `todos`が更新されるたびに、localStorageに保存するようにする。
+2. 仮でおいていた`todos`の初期値を、localStorageから取得したものに変更する。
+3. `todos`が更新されるたびに、`todos`をlocalStorageに保存するようにする。
+
+<br>
+
+> 解答: https://github.com/r4ai/svelte-skelton-template/commit/5d6bf32e4df86387fe62aa83be7dd43c52bf6990
 
 ---
 
@@ -446,6 +450,10 @@ url: https://svelte.dev/repl/f52d833de1bb46adb55e3c2fd06d5750?version=4.2.0
 1. `App.svelte`で、指定したIDのtodoアイテムを削除する関数`deleteTodo`を作成する。
 2. この`deleteTodo`を、`TodoItem`コンポーネントに渡す。
 3. `TodoItem`コンポーネント内で、削除ボタンを作成し、クリック時に`deleteTodo`を実行するようにする。
+
+<br>
+
+> 解答: https://github.com/r4ai/svelte-skelton-template/commit/90cce1421f91c9e0d5acff5bd33f25ec05e169ce
 
 ---
 layout: iframe-right
