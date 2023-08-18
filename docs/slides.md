@@ -1,7 +1,6 @@
 ---
 colorSchema: 'auto'
 layout: 'intro'
-download: true
 highlighter: shiki
 ---
 
