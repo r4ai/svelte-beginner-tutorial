@@ -146,6 +146,7 @@ layout: two-cols-header
 - 複雑
 - 動的なWebサイトに適している
   - e.g. GoogleMap, Discord, etc...
+- SvelteKit, Next.js, SolidStart, QwikCity, etc...
 
 ::right::
 
@@ -156,6 +157,7 @@ layout: two-cols-header
 - シンプル
 - 静的なWebサイトに適している
   - e.g. ブログ, ポートフォリオ, etc...
+- Ruby on Rails, Django, Astro, etc...
 
 ---
 layout: two-cols-header
@@ -168,8 +170,9 @@ layout: two-cols-header
 - Svelte は、Web アプリを構築するためのフレームワークである。
   - 主に SPA を構築するために使われる。
 - Svelte はコンパイラである。
+  - HTMLのスーパーセットであるsvelteという独自のDSLで記述する。
   - `.svelte` ファイルを一つのコンポーネント（部品）として扱い、これを実行可能な JavaScript へコンパイルする。
-  - 仮想DOMは使わない。
+- 仮想DOMは使わない。
   - $\therefore$ React等に比べてランタイムは非常に軽量で、高速に動作する。
 
 ::right::
@@ -394,12 +397,16 @@ url: https://svelte.dev/repl/d756552fc1df40a7a5dd54226b3a4597?version=4.2.0
 - `todos`の一つ一つを`todo`として、ループを回す。
 
 ---
+layout: two-cols-header
+---
 
 # 演習 Step1: コンポーネントを作ってみよう
 
+::left::
+
 1. `TodoItem.svelte`を作成する。
    1. Propsとして、`title`, `id`を受け取る。
-   2. チェックボックスとタイトルを表示する。
+   2. 完了済みかどうかを入力するチェックボックスと、受け取った`title`を表示するラベルを作成する。
 2. `App.svelte`に、Todoアプリのレイアウトを書く。
    1. 作成した`TodoItem`コンポーネントを使って、TodoListを作る。
    2. 新しいTodoを作成するフォームを作る。
@@ -407,6 +414,33 @@ url: https://svelte.dev/repl/d756552fc1df40a7a5dd54226b3a4597?version=4.2.0
 <br>
 
 > 解答：https://github.com/r4ai/svelte-skelton-template/commit/eecbfa5833cf25a44c10347a0540e53849740632
+
+::right::
+
+```svelte
+<!-- src/App.svelte -->
+<script lang="ts">
+  import TodoItem from "./lib/TodoItem.svelte";
+</script>
+
+<main>
+  <h2>ToDo List</h2>
+  <div>
+    <TodoItem id={1} title="Test1" />
+    <TodoItem id={2} title="Test2" />
+  </div>
+  <form>
+    <input type="text" placeholder="Add a new ToDo" />
+    <button>Add</button>
+  </form>
+</main>
+
+<style>
+  form {
+    margin-top: 1rem;
+  }
+</style>
+```
 
 ---
 layout: iframe-right
@@ -464,22 +498,55 @@ url: https://svelte.dev/repl/1635882bfba64ab5aa2db2b208e19c57?version=4.2.0
 > Note. Reactのように、`useState`を使ってsetterとgetterで状態を管理する必要はない。
 
 ---
+layout: two-cols-header
+---
 
 # 演習 Step2: 新しいTodoを追加出来るようにしよう
 
+::left::
+
 1. todoリストのデータを管理するための変数`todos`を`App.svelte`で定義する。
-2. この定義した変数のデータを、`TodoItem`コンポーネントに渡すことで、todoリストを表示する。
-3. フォームのsubmit時に、inputタグの値を`title`とする新しいtodoを作成し、それをtodoリストに追加する。
+2. この定義した変数のデータを、それぞれ一つずつ`TodoItem`コンポーネントに渡すことで、todoリストを表示する。
+3. フォームのsubmit時に、inputタグの値を`title`とする新しいtodoを作成し、それを`todos`に追加する。
+4. `todos`変数の値を`TodoItem`コンポーネントに渡すことで、todoリストを表示する。
 
 <br>
 
 > 解答：<https://github.com/r4ai/svelte-skelton-template/commit/e10e974d376c6fba0418cfadf2d3b2a57520b2a5>
 
+::right::
+
+- ヒント:
+  - `todos`変数の型：
+
+    ```ts
+    type Todo = { id: number; title: string };
+    type Todos = Todo[];
+    ```
+
+  - submit時に`handleSubmit`関数を実行：
+
+    ```svelte
+    <form on:submit={handleSubmit}></form>
+    ```
+
+  - 配列の要素を繰り返し処理：
+
+    ```svelte
+    {#each todos as todo}
+      <!-- TodoItemコンポーネントを表示... -->
+    {/each}
+    ```
+
+---
+layout: two-cols-header
 ---
 
 # 演習 Step3: 完了済みのタスクには打消し線を表示しよう
 
-1. `todos`で、そのタスクが完了済みかどうかを管理するためのプロパティ`completed`を追加する。
+::left::
+
+1. `todos`変数で、それぞれそのタスクが完了済みかどうかを管理するためのプロパティ`completed`を追加する。
 2. `TodoItem`コンポーネントのpropsとして、`completed`を双方向バインディングする。
 3. `TodoItem`内で、チェックボックスがチェックされている場合は`completed`を`true`にする。
 4. `TodoItem`内で、`completed`が`true`の場合は、タイトルに打消し線を表示する。
@@ -488,15 +555,51 @@ url: https://svelte.dev/repl/1635882bfba64ab5aa2db2b208e19c57?version=4.2.0
 
 > 解答: <https://github.com/r4ai/svelte-skelton-template/commit/88a56f38f1dac201c33bfe4455ed18954793c4c5>
 
+::right::
+
+- ヒント：
+  - `todos`変数の要素の型：
+
+    ```ts
+    type Todo = {
+      id: number;
+      title: string;
+      completed: boolean
+    };
+    ```
+
+  - 双方向バインディング：
+
+    ```svelte
+    <TodoItem bind:completed={todo.completed} />
+    ```
+
+  - 打消し線の表示：
+
+    ```svelte
+    <label style="text-decoration: line-through">
+    ```
+
+---
+layout: two-cols-header
 ---
 
 # 演習 Step4: todoリストを未完了と完了済みで分けて表示しよう
 
-1. filter関数を使って、`completed`が`true`のtodoリストと、`false`のtodoリストで、分けて表示する。
+::left::
+
+1. `completed`が`true`のtodoリストと、`false`のtodoリストで、分けて表示する。
 
 <br>
 
 > 解答: https://github.com/r4ai/svelte-skelton-template/commit/47f43f2a62a4a577b888ff9e2667f2208aa5cbe6
+
+::right::
+
+- ヒント:
+  - `filter`関数を使うことで、条件に合う要素だけを取り出すことができる。
+
+    参考：[Array.prototype.filter() | MDN](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)
 
 ---
 layout: iframe-right
@@ -543,25 +646,44 @@ url: https://svelte.dev/repl/f52d833de1bb46adb55e3c2fd06d5750?version=4.2.0
 
 # 演習 Step5: 作成したtodoリストをlocalStorageへ保存しよう
 
-1. todoアイテムの型定義を作成する。
-2. 仮でおいていた`todos`の初期値を、localStorageから取得したものに変更する。
-3. `todos`が更新されるたびに、`todos`をlocalStorageに保存するようにする。
+1. 仮でおいていた`todos`の初期値を、localStorageから取得したものに変更する。
+   - ヒント:
+     - localStorageから値を取得するには、`localStorage.getItem("名前")`を使う。
+     - JSONのパースは`JSON.parse`を使う。
+2. `todos`が更新されるたびに、`todos`の値をlocalStorageに保存するようにする。
+   - ヒント:
+     - Reactive Statementを使うことで、`todos`が更新されるたびに任意の処理を実行できる。
+     - オブジェクトをJSON文字列に変換するには、`JSON.stringify`を使う。
+     - localStorageへ値を保存するには、`localStorage.setItem("名前", 値)`を使う。
 
 <br>
 
 > 解答: https://github.com/r4ai/svelte-skelton-template/commit/5d6bf32e4df86387fe62aa83be7dd43c52bf6990
 
 ---
+layout: two-cols-header
+---
 
 # 演習 Step6: 作成したtodoアイテムを削除できるようにしよう
 
-1. `App.svelte`で、指定したIDのtodoアイテムを削除する関数`deleteTodo`を作成する。
-2. この`deleteTodo`を、`TodoItem`コンポーネントに渡す。
+::left::
+
+1. `App.svelte`で、指定したIDのtodoアイテムを削除する関数`deleteTodo`を定義する。
+2. この`deleteTodo`を、`TodoItem`コンポーネントにPropsとして渡す。
 3. `TodoItem`コンポーネント内で、削除ボタンを作成し、クリック時に`deleteTodo`を実行するようにする。
 
 <br>
 
 > 解答: https://github.com/r4ai/svelte-skelton-template/commit/90cce1421f91c9e0d5acff5bd33f25ec05e169ce
+
+::right::
+
+- ヒント:
+  - `on:click`を使うことで、クリック時に任意の処理を実行できる。
+
+    ```svelte
+    <button on:click={handleClick}></button>
+    ```
 
 ---
 layout: iframe-right
@@ -572,6 +694,19 @@ url: https://svelte-todo.r4ai.dev/
 
 - tailwindCSS, daisyUIを使っています。
 - リンク: [svelte-todo.r4ai.dev](https://svelte-todo.r4ai.dev)
+
+---
+
+# 今回話せなかったこと
+
+- context, store
+- SvelteKit
+  - SSR, SSG
+  - ルーティング
+  - etc...
+- UI ライブラリ
+  - Melt UI
+  - tailwindcss, daisyUI
 
 ---
 
