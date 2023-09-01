@@ -1,0 +1,15 @@
+ul {
+  @apply space-y-2;
+}
+
+ul > li {
+  @apply mt-2 text-neutral-50;
+}
+
+ul > li > ul > li {
+  @apply text-neutral-400/80 text-base;
+}
+
+blockquote > p {
+  @apply text-sm;
+}

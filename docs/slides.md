@@ -2,6 +2,8 @@
 colorSchema: 'auto'
 layout: 'intro'
 highlighter: shiki
+fonts:
+  sans: 'IBM Plex Sans JP'
 ---
 
 # Svelte 入門
@@ -34,8 +36,6 @@ highlighter: shiki
 
 > **注意**：かなり初心者向けの内容です。
 
-<SlideCurrentNo class="absolute bottom-10 right-20" />
-
 ---
 
 # アジェンダ
@@ -61,8 +61,109 @@ layout: section
 ## ～100行で作るTodoアプリ～
 
 ---
+layout: two-cols
+---
+
+# SPA とは
+
+- SPA: Single Page Application
+  - ローカルでHTMLをレンダリングする単一のJavaScriptアプリケーションで構成されるWebサイトのこと。
+  - e.g. GoogleMap, Discord, etc...
+- SPAでは、ページ遷移をするとJSが実行され、同じHTMLで差分だけ更新する。
+  - スムーズが画面遷移を実現するため、動的なWebサイトに適している。
+
+<br>
+
+> ※ ここでは、話を簡単にするために、SPAはCSR（Client Side Rendering）で実装されていると仮定する。<br>
+> なお、SvelteではメタフレームワークであるSvelteKitを使うことで、SSRやSSGも可能である。
+
+::right::
+
+```mermaid {scale: 0.53}
+sequenceDiagram
+  actor U as User
+  participant B as 🌐 Browser
+  participant S as 🖥️ Server
+  U ->> B: https://example.com/
+  B ->> S: GET / HTTP/1.1
+  S ->> B: <html>...</html>
+  B ->> S: GET /app.js HTTP/1.1
+  S ->> B: app.js の中身
+  B ->> B: HTMLを生成
+  B ->> U: レンダリングしたページを表示
+  U ->> B: ページ遷移
+  B ->> S: 差分だけリクエスト
+  S ->> B: 差分だけレスポンス
+  B ->> B: 差分だけページを更新
+  B ->> U: レンダリングしたページを表示
+```
+
+---
+layout: two-cols
+---
+
+# MPA とは
+
+- MPA: Multi Page Application
+  - 複数のHTMLページで構成されるWebサイトのこと。
+  - e.g. 阿部寛のホームページ
+- MPAでは、ページ遷移をすると新しいHTMLがサーバーから返され、ブラウザがそれを表示する。
+  - JSを実行しないため、初回表示が早い。
+  - 差分だけ更新することができないため、ページ遷移が遅い。
+
+::right::
+
+```mermaid {scale: 0.6}
+sequenceDiagram
+  actor U as User
+  participant B as 🌐 Browser
+  participant S as 🖥️ Server
+  U ->> B: https://example.com/
+  B ->> S: GET / HTTP/1.1
+  S ->> B: <html>...</html>
+  B ->> U: レンダリングしたページを表示
+  U ->> B: ページ遷移
+  B ->> S: GET /about HTTP/1.1
+  S ->> B: <html>...</html>
+  B ->> U: レンダリングしたページを表示
+```
+
+---
+layout: two-cols-header
+---
+
+# SPA vs MPA
+
+両者共に、それぞれメリット・デメリットがある。
+製品に適したものを選択する必要がある。
+
+::left::
+
+## SPA
+
+- 初回表示が遅い
+- ページ遷移は速い
+- 複雑
+- 動的なWebサイトに適している
+  - e.g. GoogleMap, Discord, etc...
+
+::right::
+
+## MPA
+
+- 初回表示が速い
+- ページ遷移は遅い
+- シンプル
+- 静的なWebサイトに適している
+  - e.g. ブログ, ポートフォリオ, etc...
+
+---
+layout: two-cols-header
+---
 
 # Svelte とは
+
+::left::
 
 - Svelte は、Web アプリを構築するためのフレームワークである。
   - 主に SPA を構築するために使われる。
@@ -71,7 +172,9 @@ layout: section
   - 仮想DOMは使わない。
   - $\therefore$ React等に比べてランタイムは非常に軽量で、高速に動作する。
 
-<img src="/svelte_compile.excalidraw.png" alt="Svelteはコンパイラである" class="mt-8 w-[50%]" />
+::right::
+
+<img src="/svelte_compile.excalidraw.png" alt="Svelteはコンパイラである" class="mt-8 w-[100%]" />
 
 ---
 layout: two-cols-header
@@ -264,6 +367,11 @@ url: https://svelte.dev/repl/b2ac5058273748188e160756a51a27fc?version=4.2.0
 - コンポーネントを関数として見ると、props は引数に相当する。
 
 - コンポーネント内でexportした変数は、親コンポーネントからpropsとして渡すことができる。子から親へも渡したい場合は、`bind:`を使う。
+
+```mermaid
+flowchart LR
+  App -->|props| Card
+```
 
 ---
 layout: iframe-right
